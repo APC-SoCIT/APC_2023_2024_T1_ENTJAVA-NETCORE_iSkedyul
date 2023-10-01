@@ -20,48 +20,77 @@
     </div>
 
     <!-- ADD APPOINTMENT MODAL -->
-    <div class="modal fade appt-modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Schedule an Appointment</h4>
-                    <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <input type="hidden" id="appointmentId" />
-                        <div class="form-group">
-                            <label for="firstName">First Name:</label>
-                            <input type="text" class="form-control" id="firstName"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name:</label>
-                            <input type="text" class="form-control" id="lastName" />
-                        </div>
-                        <div class="form-group">
-                            <label for="dateTimeOfAppointment">Appointment Date:</label>
-                            <input type="datetime-local" class="form-control" id="dateTimeOfAppointment" />
-                        </div>
-                        <div class="form-group">
-                            <label for="purpose">Purpose:</label>
-                            <input type="text" class="form-control" id="purpose" />
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="submitAppointment">Submit Appointment</button>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal fade appt-modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Schedule an Appointment</h4>
+                        <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="apptForm">
+                            @Html.ValidationSummary(true, "",new {@class = "text-danger"})
+                            <input type="hidden" id="appointmentId" />
+                            <div class="form-group">
+                                @* <label for="firstName">First Name:</label> *@
+                                @Html.LabelFor(model => model.FirstName, htmlAttributes: new{@class="control-label col-md-2"})
+                                <div class="col-mid-10">
+                                    @Html.EditorFor(model => model.FirstName, new{ htmlAttributes = new{@class="form-control", id="firstname"}})
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new{ htmlAttributes = new{@class="form-control"}})
+                                </div>
+                                @* <input type="text" class="form-control" id="firstName"/> *@
+                            </div>
+                            <div class="form-group">
+                                @* <label for="lastName">Last Name:</label> *@
+                                @Html.LabelFor(model => model.LastName, htmlAttributes: new{@class="control-label col-md-2"})
+                                <div class="col-mid-10">
+                                    @Html.EditorFor(model => model.LastName, new{ htmlAttributes = new{@class="form-control", id="lastName"}})
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new{ htmlAttributes = new{@class="form-control"}})
+                                </div>
+                                @* <input type="text" class="form-control" id="lastName" /> *@
+                            </div>
+                            <div class="form-group">
+                                @* <label for="dateTimeOfAppointment">Appointment Date:</label> *@
+                                @Html.LabelFor(model => model.DateTimeOfAppointment, htmlAttributes: new{@class="control-label col-md-2"})
+                                <div class="col-mid-10">
+                                    @Html.EditorFor(model => model.DateTimeOfAppointment, new{ htmlAttributes = new{@class="form-control", type="datetime-local", id="dateTimeOfAppointment"}})
+                                    @Html.ValidationMessageFor(model => model.DateTimeOfAppointment, "", new{ htmlAttributes = new{@class="form-control"}})
+                                </div>
+                                @* <input type="datetime-local" class="form-control" id="dateTimeOfAppointment" /> *@
+                            </div>
+                            <div class="form-group">
+                                @* <label for="purpose">Purpose:</label> *@
+                                @Html.LabelFor(model => model.Purpose, htmlAttributes: new{@class="control-label col-md-2"})
+                                <div class="col-mid-10">
+                                    @Html.EditorFor(model => model.Purpose, new{ htmlAttributes = new{@class="form-control", id="purpose"}})
+                                    @Html.ValidationMessageFor(model => model.Purpose, "", new{ htmlAttributes = new{@class="form-control"}})
+                                </div>
+                                @* <input type="text" class="form-control" id="purpose" /> *@
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" id="submitAppointment" value="Submit Appointment">
+                    </div>
                 </div>
             </div>
         </div>
+    }
+    <div>
+        @Html.ActionLink("Back To Main", "Index", "Home")
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
             let selection = document.getElementById('select');
-            select.addEventListener('change', function handleChange(event) {
+            selection.addEventListener('change', function handleChange(event) {
                 $(document).ready(function () {
                     var submitAppt = $("#submitAppointment");
 
@@ -80,55 +109,61 @@
 
                     var submitted = false;
 
-                    $("#submitAppointment").click(function () {
+                    // $("#submitAppointment").click(function () {
 
-                        if (!submitted) {
-                            submitted = true;
-                            var apptData = {
-                                AppointmentID: apptId.val().toString(),
-                                FirstName: apptFirstN.val(),
-                                LastName: apptLastN.val(),
-                                DateTimeOfAppointment: apptDate.val().toString(),
-                                Purpose: apptPurpose.val()
-                            }
+                    //     if (!submitted) {
+                    //         submitted = true;
+                    //         var apptData = {
+                    //             AppointmentID: apptId.val().toString(),
+                    //             FirstName: apptFirstN.val(),
+                    //             LastName: apptLastN.val(),
+                    //             DateTimeOfAppointment: apptDate.val().toString(),
+                    //             Purpose: apptPurpose.val()
+                    //         }
 
-                            console.log(apptData.AppointmentID);
-                            console.log(apptData.FirstName);
-                            console.log(apptData.LastName);
-                            console.log(apptData.DateTimeOfAppointment);
-                            console.log(apptData.Purpose);
+                    //         console.log(apptData.AppointmentID);
+                    //         console.log(apptData.FirstName);
+                    //         console.log(apptData.LastName);
+                    //         console.log(apptData.DateTimeOfAppointment);
+                    //         console.log(apptData.Purpose);
 
-                            if (!(apptData.FirstName.length > 0 && apptData.LastName.length > 0 &&
-                                apptData.DateTimeOfAppointment.length > 0 && apptData.Purpose.length > 0))
-                                alert("Fill up all the fields");
-                            else {
-                                $.ajax({
-                                    type: "POST",
-                                    url: "home/submitappointment",
-                                    contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify(apptData),
-                                    dataType: "json",
-                                    success: function (response) {
-                                        console.log("Appointment Added successfully");
-                                        alert("Success");
-                                        location.reload();
-                                    },
-                                    error: function (error) {
-                                        if (error.responseText = "")
-                                            location.reload();
-                                        else {
-                                            alert("Error submitting appointment! ");
-                                            // location.reload();
-                                        }
-                                    }
-                                });
-                            }
-                        }
+                    //         if (!(apptData.FirstName.length > 0 && apptData.LastName.length > 0 &&
+                    //             apptData.DateTimeOfAppointment.length > 0 && apptData.Purpose.length > 0))
+                    //             alert("Fill up all the fields");
+                    //         else {
+                    //             $.ajax({
+                    //                 type: "POST",
+                    //                 url: "home/submitappointment",
+                    //                 contentType: "application/json; charset=utf-8",
+                    //                 data: JSON.stringify(apptData),
+                    //                 dataType: "json",
+                    //                 success: function (response) {
+                    //                     console.log("Appointment Added successfully");
+                    //                     alert("Success");
+                    //                     location.reload();
+                    //                 },
+                    //                 error: function (error) {
+                    //                     if (error.responseText = "")
+                    //                         location.reload();
+                    //                     else {
+                    //                         alert("Error submitting appointment! ");
+                    //                         // location.reload();
+                    //                     }
+                    //                 }
+                    //             });
+                    //         }
+                    //     }
 
-                    });
+                    // });
 
                     $(".close-modal").click(function () {
                         apptModal.modal("hide");
+                        apptId.val(0);
+                        apptFirstN.val("");
+                        apptLastN.val("");
+                        apptDate.val("");
+                        apptPurpose.val("");
+                        apptFirstN.val("");
                     });
                 });
             });
