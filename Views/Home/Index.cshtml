@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model iSkedyul.Models.ViewModel.AppointmentModel
+<div>
+    <div class="background">
+        <div class="landingPageText">
+            <h1>
+                Welcome to iSkedyul
+            </h1>
+        </div>
+        <div class="serviceDropdown">
+            <select class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ">
+                <option class="serviceDropdown-item" value="">What are you looking for?</option>
+                <option class="serviceDropdown-item" value="Action">Action</option>
+                <option class="serviceDropdown-item" value="AAction">Another action</option>
+                <option class="serviceDropdown-item" value="SElse">Something else</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- ADD APPOINTMENT MODAL -->
+    <div class="modal fade appt-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Schedule an Appointment</h4>
+                    <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="hidden" id="appointmentId" />
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" class="form-control" id="firstName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" class="form-control" id="lastName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="dateTimeOfAppointment">Appointment Date:</label>
+                            <input type="datetime-local" class="form-control" id="dateTimeOfAppointment" />
+                        </div>
+                        <div class="form-group">
+                            <label for="purpose">Purpose:</label>
+                            <input type="text" class="form-control" id="purpose" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitAppointment">Submit Appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let selection = document.getElementById('select');
+            select.addEventListener('change', function handleChange(event) {
+                $(document).ready(function () {
+                    var submitAppt = $("#submitAppointment");
+
+                    var apptModal = $(".appt-modal");
+                    var apptId = $("#appointmentId");
+                    var apptFirstN = $("#firstName");
+                    var apptLastN = $("#lastName");
+                    var apptDate = $("#dateTimeOfAppointment");
+                    var apptPurpose = $("#purpose");
+
+                    if (event.target.value && (event.target.value = $.trim(event.target.value))) {
+                        apptId.val(/* event.target.value + '-' +  */uniqueID());
+
+                        apptModal.modal("show");
+                    }
+
+                    var submitted = false;
+
+                    $("#submitAppointment").click(function () {
+
+                        if (!submitted) {
+                            submitted = true;
+                            var apptData = {
+                                AppointmentID: apptId.val().toString(),
+                                FirstName: apptFirstN.val(),
+                                LastName: apptLastN.val(),
+                                DateTimeOfAppointment: apptDate.val().toString(),
+                                Purpose: apptPurpose.val()
+                            }
+
+                            console.log(apptData.AppointmentID);
+                            console.log(apptData.FirstName);
+                            console.log(apptData.LastName);
+                            console.log(apptData.DateTimeOfAppointment);
+                            console.log(apptData.Purpose);
+
+                            if (!(apptData.FirstName.length > 0 && apptData.LastName.length > 0 &&
+                                apptData.DateTimeOfAppointment.length > 0 && apptData.Purpose.length > 0))
+                                alert("Fill up all the fields");
+                            else {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "home/submitappointment",
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify(apptData),
+                                    dataType: "json",
+                                    success: function (response) {
+                                        console.log("Appointment Added successfully");
+                                        alert("Success");
+                                        location.reload();
+                                    },
+                                    error: function (error) {
+                                        if (error.responseText = "")
+                                            location.reload();
+                                        else {
+                                            alert("Error submitting appointment! ");
+                                            // location.reload();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+
+                    });
+
+                    $(".close-modal").click(function () {
+                        apptModal.modal("hide");
+                    });
+                });
+            });
+
+            function uniqueID() {
+                return Math.floor(Math.random() * Date.now())
+            }
+        });
+    </script>
+</div>
