@@ -32,9 +32,12 @@ namespace iSkedyul.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> SubmitAppointment([FromBody] AppointmentModel apptData)
+        public ActionResult Index(AppointmentModel apptData)
         {
-                AppointmentManager am = new AppointmentManager();
+            AppointmentManager am = new AppointmentManager();
+
+            if (apptData.AppointmentID.ToString().Length > 0)
+            {
 
                 Console.WriteLine(apptData.AppointmentID);
                 Console.WriteLine(apptData.FirstName);
@@ -44,6 +47,8 @@ namespace iSkedyul.Controllers
 
                 am.AddAppointment(apptData);
                 return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
