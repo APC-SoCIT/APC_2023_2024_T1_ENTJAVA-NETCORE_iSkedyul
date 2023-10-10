@@ -25,25 +25,28 @@ namespace iSkedyul.Models.EntityManager
             }
         }
 
-        public List<AppointmentModel> GetAppointments()
+        public AppointmentsModel GetAppointments()
         {
+            AppointmentsModel list = new AppointmentsModel();
+
             using (MyDBContext dbContext = new MyDBContext())
             {
-                // Retrieve all appointments info from the database
-                List<Appointment> dbAppointments = dbContext.Appointments.ToList();
-
-                // Map the database Appointment objects to AppointmentModel objects
-                List<AppointmentModel> appointments = dbAppointments.Select(dbAppt => new AppointmentModel
+                list.Appointments = dbContext.Appointments.Select(records => new AppointmentModel()
                 {
-                    AppointmentID = dbAppt.AppointmentID,
-                    FirstName = dbAppt.FirstName,
-                    LastName = dbAppt.LastName,
-                    DateTimeOfAppointment = dbAppt.DateTimeOfAppointment,
-                    Purpose = dbAppt.Purpose
+                    AppointmentID = records.AppointmentID,
+                    FirstName = records.FirstName,
+                    LastName = records.LastName,
+                    DateTimeOfAppointment = records.DateTimeOfAppointment,
+                    Purpose = records.Purpose
                 }).ToList();
 
-                return appointments;
+                for (int i = 0; i < list.Appointments.Count; i++)
+                {
+                    Console.WriteLine(list.Appointments[i].FirstName);
+                }
             }
+
+            return list;
         }
 
 

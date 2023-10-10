@@ -1,5 +1,4 @@
-﻿using iSkedyul.Models.DB;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace iSkedyul.Models.ViewModel
 {
@@ -20,9 +19,9 @@ namespace iSkedyul.Models.ViewModel
         [Display(Name = "Purpose")]
         public string Purpose { get; set; }
     }
-    public class AppointmentModel
+    public class AppointmentsModel
     {
-        public List<Appointment> Appointments { get; set; }
+        public List<AppointmentModel> Appointments { get; set; }
     }
 
 
