@@ -24,7 +24,18 @@ namespace iSkedyul.Controllers
         {
             return View();
         }
+        public ActionResult Appointments()
+        {
+            AppointmentManager appointmentManager = new AppointmentManager();
+            List<AppointmentModel> appointments = appointmentManager.GetAppointments(); // Retrieve appointments from your database
 
+            AppointmentModel appointmentModel = new AppointmentModel
+            {
+                Appointments = appointments
+            };
+
+            return View(appointmentModel);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -48,6 +59,11 @@ namespace iSkedyul.Controllers
                 am.AddAppointment(apptData);
                 return RedirectToAction("Index");
             }
+            return View();
+        }
+
+        public ActionResult Appointment()
+        {
             return View();
         }
     }
