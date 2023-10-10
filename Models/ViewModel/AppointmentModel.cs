@@ -19,4 +19,10 @@ namespace iSkedyul.Models.ViewModel
         [Display(Name = "Purpose")]
         public string Purpose { get; set; }
     }
+    public class AppointmentsModel
+    {
+        public List<AppointmentModel> Appointments { get; set; }
+    }
+
+
 }

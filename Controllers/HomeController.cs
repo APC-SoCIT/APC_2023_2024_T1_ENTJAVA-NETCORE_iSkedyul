@@ -25,6 +25,14 @@ namespace iSkedyul.Controllers
             return View();
         }
 
+        public ActionResult Appointment()
+        {
+            AppointmentManager appointmentManager = new AppointmentManager();
+            AppointmentsModel appointments = appointmentManager.GetAppointments();
+
+            return View(appointments);
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -38,13 +46,6 @@ namespace iSkedyul.Controllers
 
             if (apptData.AppointmentID.ToString().Length > 0)
             {
-
-                Console.WriteLine(apptData.AppointmentID);
-                Console.WriteLine(apptData.FirstName);
-                Console.WriteLine(apptData.LastName);
-                Console.WriteLine(apptData.DateTimeOfAppointment);
-                Console.WriteLine(apptData.Purpose);
-
                 am.AddAppointment(apptData);
                 return RedirectToAction("Index");
             }
