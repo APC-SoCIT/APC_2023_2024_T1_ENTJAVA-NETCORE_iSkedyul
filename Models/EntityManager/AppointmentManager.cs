@@ -39,17 +39,27 @@ namespace iSkedyul.Models.EntityManager
                     DateTimeOfAppointment = records.DateTimeOfAppointment,
                     Purpose = records.Purpose
                 }).ToList();
-
-                for (int i = 0; i < list.Appointments.Count; i++)
-                {
-                    Console.WriteLine(list.Appointments[i].FirstName);
-                }
             }
 
             return list;
         }
 
+        public void UpdateAppointment(AppointmentModel appointment)
+        {
+            using (MyDBContext db = new MyDBContext())
+            {
+                Appointment existingAppointment = db.Appointments.FirstOrDefault(a => a.AppointmentID == appointment.AppointmentID);
 
+                if(existingAppointment != null)
+                {
+                    existingAppointment.FirstName = appointment.FirstName;
+                    existingAppointment.LastName = appointment.LastName;
+                    existingAppointment.DateTimeOfAppointment = appointment.DateTimeOfAppointment;
+                    existingAppointment.Purpose = appointment.Purpose;
 
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }

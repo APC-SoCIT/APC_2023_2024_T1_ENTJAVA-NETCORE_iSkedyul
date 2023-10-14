@@ -51,5 +51,13 @@ namespace iSkedyul.Controllers
             }
             return View();
         }
+
+        [HttpPut]
+        public async Task<ActionResult> Update([FromBody] AppointmentModel apptData)
+        {
+            AppointmentManager am = new AppointmentManager();
+            am.UpdateAppointment(apptData);
+            return Redirect("Index");
+        }
     }
 }
