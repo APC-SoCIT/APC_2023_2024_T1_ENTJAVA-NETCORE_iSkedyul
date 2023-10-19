@@ -25,6 +25,10 @@ app.MapControllerRoute(
     pattern: "Home/{action=Index}/{id?}"); // Updated pattern for the "Account" controller.
 
 app.MapControllerRoute(
+    name: "Admin",
+    pattern: "Admin/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 

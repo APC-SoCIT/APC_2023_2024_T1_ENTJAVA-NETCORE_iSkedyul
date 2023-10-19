@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Admin Page";
+}
+@model iSkedyul.Models.ViewModel.AppointmentsModel
+<div>
+    <div class="adminBackground">
+        <div class="container text-center">
+            <div id="controls">
+                <input type="date" value="" id="datePicker"/>
+                <button class="btn btn-primary" id="searchBtn">Search</button>
+            </div>
+            <br />
+            <br />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Appointment ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Date and Time</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var appt in Model.Appointments)
+                    {
+                        <tr>
+                            <td>@appt.AppointmentID</td>
+                            <td>@appt.FirstName</td>
+                            <td>@appt.LastName</td>
+                            <td>@appt.DateTimeOfAppointment.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@appt.Purpose</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const date = new Date();
+
+        let currentDay = String(date.getDate()).padStart(2, '0');
+        let currentMonth = String(date.getMonth() + 1).padStart(2, '0');
+        let currentYear = String(date.getFullYear());
+
+        let currentDate = currentYear + "-" + currentMonth + "-" + currentDay;
+        console.log(currentDate);
+
+        var datePicker = $("#datePicker");
+        var search = $("#searchBtn");
+
+        datePicker.val(currentDate);
+
+        function reloadAppointmentList() {
+            $.ajax({
+                type: "GET",
+                url: "/admin/appointments",
+                success: function (response) {
+                    userListContainer.html(response);
+                },
+                error: function (error) {
+                    console.error("Error fetching user list: ", error);
+                }
+            });
+        }
+    });
+</script>
