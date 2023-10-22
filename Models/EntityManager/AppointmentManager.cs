@@ -1,5 +1,6 @@
 ﻿using iSkedyul.Models.DB;
 using iSkedyul.Models.ViewModel;
+using Microsoft.Identity.Client;
 using System;
 using System.Linq;
 
@@ -39,6 +40,33 @@ namespace iSkedyul.Models.EntityManager
                     DateTimeOfAppointment = records.DateTimeOfAppointment,
                     Purpose = records.Purpose
                 }).ToList();
+
+                Console.WriteLine(list.Appointments[0].DateTimeOfAppointment);
+            }
+
+            return list;
+        }
+        public AppointmentsModel GetAppointments(DateTime filter)
+        {
+            AppointmentsModel list = new AppointmentsModel();
+            list.Appointments = new List<AppointmentModel>();
+
+            using (MyDBContext dbContext = new MyDBContext())
+            {
+                var Appointments = dbContext.Appointments.Where( r => r.DateTimeOfAppointment.Date.Equals(filter.Date));
+
+                foreach (var a in Appointments)
+                {
+                    AppointmentModel appt = new AppointmentModel()
+                    {
+                        AppointmentID = a.AppointmentID,
+                        FirstName = a.FirstName,
+                        LastName = a.LastName,
+                        DateTimeOfAppointment = a.DateTimeOfAppointment,
+                        Purpose = a.Purpose
+                    };
+                    list.Appointments.Add(appt);
+                }
             }
 
             return list;

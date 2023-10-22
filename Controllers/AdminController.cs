@@ -10,17 +10,18 @@ namespace iSkedyul.Controllers
         public ActionResult Index()
         {
             AppointmentManager appointmentManager = new AppointmentManager();
-            AppointmentsModel appointments = appointmentManager.GetAppointments();
+            AppointmentsModel appointments = appointmentManager.GetAppointments(DateTime.Now);
 
             return View(appointments);
         }
 
         [HttpGet]
-        public ActionResult Appointments()
+        public ActionResult Index(string filter)
         {
+            AppointmentManager appointmentManager = new AppointmentManager();
+            AppointmentsModel appointments = appointmentManager.GetAppointments(string.IsNullOrWhiteSpace(filter) ? DateTime.Now : DateTime.Parse(filter));
 
-
-            return View();
+            return View(appointments);
         }
     }
 }
