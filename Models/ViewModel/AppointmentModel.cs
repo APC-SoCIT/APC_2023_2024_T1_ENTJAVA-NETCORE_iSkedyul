@@ -18,6 +18,7 @@ namespace iSkedyul.Models.ViewModel
         [Required(ErrorMessage = "*")]
         [Display(Name = "Purpose")]
         public string Purpose { get; set; }
+
     }
     public class AppointmentsModel
     {

@@ -17,45 +17,93 @@
                 <option class="serviceDropdown-item" value="SElse">Appointment</option>
             </select>
         </div>
-
+        <div class="container" id="hotline">
+            <ul>
+                <li>911</li>
+                <li>911</li>
+                <li>911</li>
+                <li>911</li>
+                <li>911</li>
+            </ul>
+        </div>
+        <div id="para1">
+            <p>Health Center Hotline</p>
+        </div>
+        <div id="para2">
+            <p>BFP Hotline</p>
+        </div>
+        <div id="para3">
+            <p>National Emergency Hotline</p>
+        </div>
+        <div id="para4">
+            <p>PNP Hotline</p>
+        </div>
+        <div id="para5">
+            <p>Barangay Hotline</p>
+        </div>
+        <div class="container" id="notif-1">
+            <p>
+                Sarado po ang mga serbisyo ng baranggay tuwing araw ng linggo
+                ngunit andito maari pa ring magpa-iSkedyul.
+            </p>
+        </div>
+        <div class="container" id="notif-2">
+            <p>
+                Libreng bakuna ng Anti-rabies at Anti-tetanus nagaganap po ngayong araw ng Lunes.
+                Mabuting mag-punta sa baranggay hall upang mabakunahan.
+            </p>
+        </div>
+        <div class="container" id="notif-3">
+            <p>
+                Sa darating na 09/11/2023 ay magkakaroon ng bigayan ng Cash Assistance para sa mga estudyante
+                ng kolehiyo sa ating baranggay.
+            </p>
+        </div>
+    </div>
+    <div class="background-2">
+        <div class="services">
+            <h1>
+                Services that we offer:
+            </h1>
+        </div>
         <div class="container" id="description-1">
             <h2>
-                Appointment
+            Appointment
             </h2>
             <i class="fa-regular fa-calendar-days"></i>
             <p>
-                Schedule an Appointment with us!
+            Schedule an Appointment with us!
             </p>
             <button type="button" id="appointmentBtn">
-                Schedule
+            Schedule
             </button>
-        </div>
-        <div class="container" id="description-2">
+            </div>
+            <div class="container" id="description-2">
             <h2>
-                Vaccination
+            Vaccination
             </h2>
             <i class="fa-solid fa-syringe"></i>
             <p>
-                Pick a date and time for the vaccination!
+            Pick a date and time for the vaccination!
             </p>
             <button type="button" id="vaccinationBtn">
-                Date and Time
+            Date and Time
             </button>
-        </div>
-        <div class="container" id="description-3">
+            </div>
+            <div class="container" id="description-3">
             <h2>
-                Baranggay ID / Clearance
+            Baranggay ID / Clearance
             </h2>
             <i class="fa-solid fa-id-card"></i>
             <p>
-                Fill out the form and choose a prefer date.
+            Fill out the form and choose a prefer date.
             </p>
             <button type="button" id="brgyBtn">
-                Form
+            Form
             </button>
         </div>
     </div>
-
+    
     <!-- ADD APPOINTMENT MODAL -->
     @using (Html.BeginForm())
     {
@@ -226,10 +274,6 @@
             </div>
         </div>
     }
-
-    <div>
-        @Html.ActionLink("Back To Main", "Index", "Home")
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 

@@ -13,7 +13,7 @@ namespace iSkedyul.Models.DB
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MidtermsDB;Initial Catalog=iSkedyulDB;Integrated Security=True;Multiple Active Result Sets=True");
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MidtermsDB;Initial Catalog=DBiSkedyul;Integrated Security=True;Multiple Active Result Sets=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

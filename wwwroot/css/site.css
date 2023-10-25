@@ -29,22 +29,23 @@ body {
     background-size: cover;
     position: relative;
     width: 100%;
-    height: 10in;
+    height: 8.5in;
 }
 
 .landingPageText {
     text-align: center;
     position: absolute;
     color: white;
-    top: 25%;
+    top: 15%;
     left: 50%;
     transform: translate(-50%, 0%);
     filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 1));
+    letter-spacing: 1px;
 }
 
 .serviceDropdown {
     position: absolute;
-    top: 50%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%,-50%);
 }
@@ -56,7 +57,7 @@ body {
 
 .landingPageText h1 {
     font-family: 'Oswald', sans-serif;
-    font-size: 95px;
+    font-size: 125px;
     color: #EBEBEB;
 }
 
@@ -94,7 +95,7 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 2%;
     width: 450px;
     max-width: 100%;
@@ -143,8 +144,8 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 40%;
-    left: 35%;
+    top: 30%;
+    left: 37%;
     width: 450px;
     max-width: 100%;
     min-height: 500px;
@@ -192,7 +193,7 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 40%;
+    top: 30%;
     right: 2%;
     width: 450px;
     max-width: 100%;
@@ -235,3 +236,172 @@ body {
         text-transform: uppercase;
         cursor: pointer;
     }
+
+#hotline{
+    position: absolute;
+    top:85%;
+    left: 5%;
+}
+
+#hotline ul{
+    list-style: none;
+    display: flex;
+}
+    #hotline li {
+        color: white;
+        margin-right: 300px;
+        font-size: 25px;
+        font-weight: 500;
+        transform: translate(-50%, 0%);
+        filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 1));
+    }
+
+#para1 p {
+    position: absolute;
+    top: 90%;
+    left: 1%;
+    color: white;
+    font-weight: 700;
+    font-size: 25px;
+    filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 1));
+}
+
+#para2 p {
+    position: absolute;
+    top: 90%;
+    left: 24%;
+    color: white;
+    font-weight: 700;
+    font-size: 25px;
+    filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 1));
+}
+
+#para3 p {
+    position: absolute;
+    top: 90%;
+    left: 38%;
+    color: white;
+    font-weight: 700;
+    font-size: 25px;
+    filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 1));
+}
+
+#para4 p {
+    position: absolute;
+    top: 90%;
+    left: 65%;
+    color: white;
+    font-weight: 700;
+    font-size: 25px;
+    filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 1));
+}
+
+#para5 p {
+    position: absolute;
+    top: 90%;
+    left: 84%;
+    color: white;
+    font-weight: 700;
+    font-size: 25px;
+    filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 1));
+}
+
+#notif-1 {
+    background: #8c8135c5;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    width: 450px;
+    max-width: 100%;
+    min-height: 100px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+    overflow: hidden;
+}
+
+#notif-1 p {
+    text-align: center;
+    justify-content: center;
+    padding-top: 15px;
+    font-size: 18px;
+    font-style: normal;
+    color: white;
+    font-weight: 300;
+}
+#notif-2 {
+    background: #8c8135c5;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 15%;
+    right: 2%;
+    width: 450px;
+    max-width: 100%;
+    min-height: 100px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+    overflow: hidden;
+}
+
+    #notif-2 p {
+        text-align: center;
+        justify-content: center;
+        padding-top: 15px;
+        font-size: 18px;
+        font-style: normal;
+        color: white;
+        font-weight: 300;
+    }
+#notif-3 {
+    background: #8c8135c5;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 30%;
+    right: 2%;
+    width: 450px;
+    max-width: 100%;
+    min-height: 100px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+    overflow: hidden;
+}
+
+    #notif-3 p {
+        text-align: center;
+        justify-content: center;
+        padding-top: 15px;
+        font-size: 18px;
+        font-style: normal;
+        color: white;
+        font-weight: 300;
+    }
+
+.background-2 {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../image/back3.png");
+    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 8.5in;
+}
+
+.services {
+    text-align: center;
+    position: absolute;
+    color: white;
+    top: 15%;
+    left: 20%;
+    transform: translate(-50%, 0%);
+    filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 1));
+    letter-spacing: .5px;
+}
+.services h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 50px;
+    color: #EBEBEB;
+}
