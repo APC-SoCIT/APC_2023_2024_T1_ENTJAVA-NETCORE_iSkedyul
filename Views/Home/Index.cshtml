@@ -9,37 +9,30 @@
                 Welcome to iSkedyul
             </h1>
         </div>
-        <div class="serviceDropdown">
+        @* <div class="serviceDropdown">
             <select class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ">
                 <option class="serviceDropdown-item" value="">What are you looking for?</option>
                 <option class="serviceDropdown-item" value="Action">Appointment</option>
                 <option class="serviceDropdown-item" value="AAction">Appointment</option>
                 <option class="serviceDropdown-item" value="SElse">Appointment</option>
             </select>
-        </div>
-        <div class="container" id="hotline">
-            <ul>
-                <li>911</li>
-                <li>911</li>
-                <li>911</li>
-                <li>911</li>
-                <li>911</li>
-            </ul>
-        </div>
-        <div id="para1">
-            <p>Health Center Hotline</p>
-        </div>
-        <div id="para2">
-            <p>BFP Hotline</p>
-        </div>
-        <div id="para3">
-            <p>National Emergency Hotline</p>
-        </div>
-        <div id="para4">
-            <p>PNP Hotline</p>
-        </div>
-        <div id="para5">
-            <p>Barangay Hotline</p>
+        </div> *@
+        <div class="row" id="hotline">
+            <div class="col" style="flex: 1">
+                <p><center>911<br>Health Center Hotline</center></p>
+            </div>
+            <div class="col" style="flex: 1">
+                <p><center>911<br>BFP Hotline</center></p>
+            </div>
+            <div class="col" style="flex: 1">
+                <p><center>911<br>National Emergency Hotline</center></p>
+            </div>
+            <div class="col" style="flex: 1">
+                <p><center>911<br>PNP Hotline</center></p>
+            </div>
+            <div class="col" style="flex: 1">
+                <p><center>911<br>Barangay Hotline</center></p>
+            </div>
         </div>
         <div class="container" id="notif-1">
             <p>
@@ -66,41 +59,43 @@
                 Services that we offer:
             </h1>
         </div>
-        <div class="container" id="description-1">
-            <h2>
-            Appointment
-            </h2>
-            <i class="fa-regular fa-calendar-days"></i>
-            <p>
-            Schedule an Appointment with us!
-            </p>
-            <button type="button" id="appointmentBtn">
-            Schedule
-            </button>
+        <div class="row" style="position: relative; top: 25%;">
+            <div class="col" id="serviceCard">
+                <h2>
+                    Appointment
+                </h2>
+                <i class="fa-regular fa-calendar-days"></i>
+                <p>
+                    Schedule an Appointment with us!
+                </p>
+                <button type="button" id="appointmentBtn">
+                    Schedule
+                </button>
             </div>
-            <div class="container" id="description-2">
-            <h2>
-            Vaccination
-            </h2>
-            <i class="fa-solid fa-syringe"></i>
-            <p>
-            Pick a date and time for the vaccination!
-            </p>
-            <button type="button" id="vaccinationBtn">
-            Date and Time
-            </button>
+            <div class="col" id="serviceCard">
+                <h2>
+                    Vaccination
+                </h2>
+                <i class="fa-solid fa-syringe"></i>
+                <p>
+                    Pick a date and time for the vaccination!
+                </p>
+                <a asp-area="" asp-controller="Home" asp-action="Vaccination">
+                    Date and Time
+                </a>
             </div>
-            <div class="container" id="description-3">
-            <h2>
-            Baranggay ID / Clearance
-            </h2>
-            <i class="fa-solid fa-id-card"></i>
-            <p>
-            Fill out the form and choose a prefer date.
-            </p>
-            <button type="button" id="brgyBtn">
-            Form
-            </button>
+            <div class="col" id="serviceCard">
+                <h2>
+                    Baranggay ID / Clearance
+                </h2>
+                <i class="fa-solid fa-id-card"></i>
+                <p>
+                    Fill out the form and choose a prefer date.
+                </p>
+                <a asp-area="" asp-controller="Home" asp-action="BarangayForm">
+                    Form
+                </a>
+            </div>
         </div>
     </div>
     
@@ -166,115 +161,6 @@
         </div>
     }
 
-    <!-- VACCINATION MODAL -->
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="modal fade vax-modal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Schedule for Vaccination</h4>
-                        <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="vaxForm">
-
-                            @* @Html.ValidationSummary(true, "",new {@class = "text-danger"})
-                            <input type="hidden" id="appointmentId" />
-                            <div class="form-group">
-                                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new{@class="control-label col-md-2"})
-                                <div class="col-mid-10">
-                                            @Html.EditorFor(model => model.FirstName, new{ htmlAttributes = new{@class="form-control", id="firstname"}})
-                                            @Html.ValidationMessageFor(model => model.FirstName, "", new{ htmlAttributes = new{@class="form-control"}})
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                        @Html.LabelFor(model => model.LastName, htmlAttributes: new{@class="control-label col-md-2"})
-                                <div class="col-mid-10">
-                                            @Html.EditorFor(model => model.LastName, new{ htmlAttributes = new{@class="form-control", id="lastName"}})
-                                            @Html.ValidationMessageFor(model => model.LastName, "", new{ htmlAttributes = new{@class="form-control"}})
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                        @Html.LabelFor(model => model.DateTimeOfAppointment, htmlAttributes: new{@class="control-label col-md-2"})
-                                <div class="col-mid-10">
-                                            @Html.EditorFor(model => model.DateTimeOfAppointment, new{ htmlAttributes = new{@class="form-control", type="datetime-local", id="dateTimeOfAppointment"}})
-                                            @Html.ValidationMessageFor(model => model.DateTimeOfAppointment, "", new{ htmlAttributes = new{@class="form-control"}})
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                        @Html.LabelFor(model => model.Purpose, htmlAttributes: new{@class="control-label col-md-2"})
-                                <div class="col-mid-10">
-                                            @Html.EditorFor(model => model.Purpose, new{ htmlAttributes = new{@class="form-control", id="purpose"}})
-                                            @Html.ValidationMessageFor(model => model.Purpose, "", new{ htmlAttributes = new{@class="form-control"}})
-                                </div>
-                            </div> *@
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" id="submitVax" value="Submit Appointment">
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-
-    <!-- BARANGAY ID / CLEARANCE -->
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="modal fade brgy-modal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Schedule for Barangay ID/Clearance</h4>
-                        <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="brgyForm">
-                            @* @Html.ValidationSummary(true, "",new {@class = "text-danger"})
-                            <input type="hidden" id="appointmentId" />
-                            <div class="form-group">
-                                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new{@class="control-label col-md-2"})
-                                <div class="col-mid-10">
-                                            @Html.EditorFor(model => model.FirstName, new{ htmlAttributes = new{@class="form-control", id="firstname"}})
-                                            @Html.ValidationMessageFor(model => model.FirstName, "", new{ htmlAttributes = new{@class="form-control"}})
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                        @Html.LabelFor(model => model.LastName, htmlAttributes: new{@class="control-label col-md-2"})
-                                <div class="col-mid-10">
-                                            @Html.EditorFor(model => model.LastName, new{ htmlAttributes = new{@class="form-control", id="lastName"}})
-                                            @Html.ValidationMessageFor(model => model.LastName, "", new{ htmlAttributes = new{@class="form-control"}})
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                        @Html.LabelFor(model => model.DateTimeOfAppointment, htmlAttributes: new{@class="control-label col-md-2"})
-                                <div class="col-mid-10">
-                                            @Html.EditorFor(model => model.DateTimeOfAppointment, new{ htmlAttributes = new{@class="form-control", type="datetime-local", id="dateTimeOfAppointment"}})
-                                            @Html.ValidationMessageFor(model => model.DateTimeOfAppointment, "", new{ htmlAttributes = new{@class="form-control"}})
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                        @Html.LabelFor(model => model.Purpose, htmlAttributes: new{@class="control-label col-md-2"})
-                                <div class="col-mid-10">
-                                            @Html.EditorFor(model => model.Purpose, new{ htmlAttributes = new{@class="form-control", id="purpose"}})
-                                            @Html.ValidationMessageFor(model => model.Purpose, "", new{ htmlAttributes = new{@class="form-control"}})
-                                </div>
-                            </div> *@
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" id="submitBrgy" value="Submit Appointment">
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
@@ -285,9 +171,8 @@
                 var submitAppt = $("#submitAppointment");
 
                 var apptModal = $(".appt-modal");
-                var vaxModal = $(".vax-modal");
-                var brgyModal = $(".brgy-modal");
 
+                // APPOINTMENT VARIABLES
                 var apptId = $("#appointmentId");
                 var apptFirstN = $("#firstName");
                 var apptLastN = $("#lastName");
@@ -305,9 +190,8 @@
                 $(".close-modal").click(function () {
 
                     apptModal.modal("hide");
-                    vaxModal.modal("hide");
-                    brgyModal.modal("hide");
 
+                    // RESET APPOINTMENT VALUES
                     apptId.val(0);
                     apptFirstN.val("");
                     apptLastN.val("");
@@ -319,16 +203,6 @@
                 $("#appointmentBtn").click(function () {
                     console.log("clicked appointment");
                     apptModal.modal("show");
-                });
-
-                $("#vaccinationBtn").click(function () {
-                    console.log("clicked vax");
-                    vaxModal.modal("show");
-                });
-
-                $("#brgyBtn").click(function () {
-                    console.log("clicked brgy");
-                    brgyModal.modal("show");
                 });
             });
 

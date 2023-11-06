@@ -2,6 +2,7 @@
 using iSkedyul.Models.EntityManager;
 using iSkedyul.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Diagnostics;
 
 namespace iSkedyul.Controllers
@@ -22,6 +23,48 @@ namespace iSkedyul.Controllers
 
         public IActionResult Privacy()
         {
+            return View();
+        }
+
+        public IActionResult Vaccination()
+        {
+            return View();
+        }
+
+        public IActionResult BarangayForm() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Vaccination(VaccinationModel vaxData)
+        {
+            ModelState.Remove("MiddleName");
+
+            if (ModelState.IsValid)
+            {
+                VaccinationManager vm = new VaccinationManager();
+
+                vm.AddVaccination(vaxData);
+
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BarangayForm(BarangayFormModel formData)
+        {
+            ModelState.Remove("MiddleName");
+
+            if (ModelState.IsValid)
+            {
+                BarangayFormManager bm = new BarangayFormManager();
+
+                bm.AddBarangayForm(formData);
+
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
